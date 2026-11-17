@@ -267,31 +267,40 @@ tr.undone td:nth-child(2) { text-decoration: line-through; }
 /* หน้าเข้าสู่ระบบ */
 .login-screen { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 24px 16px; overflow-y: auto; background: var(--surface); }
 .login-screen[hidden] { display: none; }
-.login-card { width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 22px; }
-.login-logo { display: block; width: 280px; max-width: 70%; height: auto; margin: 0 auto 4px; }
+.login-card { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 16px; }
+.login-logo { display: block; width: 200px; max-width: 60%; height: auto; margin: 0 auto 2px; }
 :root[data-theme="dark"] .login-logo { background: #fff; padding: 8px 12px; border-radius: 12px; }
-.login-title { margin: 0; text-align: center; font-size: 32px; line-height: 1.3; font-weight: 700; }
-.login-sub { margin: -10px 0 8px; text-align: center; color: var(--text); font-size: 16px; }
-.lg-fl { display: flex; flex-direction: column; gap: 10px; font-weight: 700; font-size: 17px; }
-.lg-inp { width: 100%; height: 66px; padding: 0 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface);
-  font-size: 18px; font-weight: 400; outline: none; transition: border-color .15s, box-shadow .15s; }
+.login-title { margin: 0; text-align: center; font-size: 24px; line-height: 1.3; font-weight: 700; }
+.login-sub { margin: -8px 0 6px; text-align: center; color: var(--muted); font-size: 14px; }
+.lg-fl { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 14px; }
+.lg-inp { width: 100%; height: 48px; padding: 0 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface);
+  font-size: 15px; font-weight: 400; outline: none; transition: border-color .15s, box-shadow .15s; }
 .lg-inp::placeholder { color: var(--muted); }
 .lg-inp:focus { border-color: #1f3a8a; box-shadow: 0 0 0 3px color-mix(in srgb, #1f3a8a 15%, transparent); }
 .lg-inp.invalid { border-color: var(--danger); }
 .lg-select, .lg-pass { position: relative; display: block; }
-.lg-select .lg-inp { padding-right: 52px; }
-.lg-select > .ico { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-.lg-select input::-webkit-calendar-picker-indicator { opacity: 0; }
-.lg-pass .lg-inp { padding-right: 60px; }
-.lg-eye { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; display: grid; place-items: center;
-  border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 10px; }
+.lg-select .lg-inp { padding-right: 46px; }
+.lg-chev { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; display: grid; place-items: center;
+  border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 8px; }
+.lg-chev:hover { background: var(--surface-2); color: var(--text); }
+.lg-list { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 5; max-height: 260px; overflow-y: auto; padding: 6px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 12px 30px rgba(16, 24, 40, .15); }
+.lg-list[hidden] { display: none; }
+.lg-opt { display: block; width: 100%; text-align: left; padding: 9px 12px; border: 0; border-radius: 8px; background: none; cursor: pointer; font-size: 14px; font-weight: 400; }
+.lg-opt:hover, .lg-opt.on { background: var(--surface-2); }
+.lg-opt.sel { color: #1f3a8a; font-weight: 700; }
+:root[data-theme="dark"] .lg-opt.sel { color: #8fb0ff; }
+.lg-none { padding: 10px 12px; color: var(--muted); font-size: 14px; font-weight: 400; }
+.lg-pass .lg-inp { padding-right: 52px; }
+.lg-eye { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; display: grid; place-items: center;
+  border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 8px; }
 .lg-eye:hover { background: var(--surface-2); color: var(--text); }
-.lg-eye .ico { width: 22px; height: 22px; }
-.lg-btn { height: 70px; margin-top: 8px; border: 0; border-radius: 16px; background: #1f3a8a; color: #fff; font-size: 19px; font-weight: 700; cursor: pointer; }
+.lg-eye .ico { width: 20px; height: 20px; }
+.lg-btn { height: 50px; margin-top: 6px; border: 0; border-radius: 12px; background: #1f3a8a; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; }
 .lg-btn:hover { background: #18307a; }
 .lg-btn:disabled { opacity: .7; cursor: progress; }
-.login-err { color: var(--danger); font-size: 14px; min-height: 18px; margin: -10px 0 -14px; text-align: center; }
-@media (max-width: 520px) { .login-title { font-size: 24px; } .lg-inp { height: 56px; font-size: 16px; } .lg-btn { height: 58px; } }
+.login-err { color: var(--danger); font-size: 13px; min-height: 16px; margin: -8px 0 -10px; text-align: center; }
+@media (max-width: 520px) { .login-title { font-size: 21px; } }
 /* สรุปเคส */
 .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 26px; }
 .case-box { border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; background: var(--surface); min-width: 0; }
@@ -791,9 +800,10 @@ body.busy .modal-foot .btn, body.busy [data-action="ack"] { pointer-events: none
         <h1 class="login-title">Temperature Control Dashboard</h1>
         <p class="login-sub">กรุณาเข้าสู่ระบบ</p>
         <label class="lg-fl">DC
-          <span class="lg-select"><input class="lg-inp" id="lgTeam" list="lgTeams" autocomplete="off" disabled
-            placeholder="ผู้ใช้ส่วนกลาง · BKK · หรือพิมพ์ชื่อ DC" value="${esc(last)}">${icon('chevron')}</span>
-          <datalist id="lgTeams"></datalist></label>
+          <span class="lg-select"><input class="lg-inp" id="lgTeam" autocomplete="off" disabled role="combobox" aria-expanded="false" aria-controls="lgList"
+            placeholder="ผู้ใช้ส่วนกลาง · BKK · หรือพิมพ์ชื่อ DC" value="${esc(last)}">
+            <button type="button" class="lg-chev" data-action="lg-toggle" tabindex="-1" aria-label="แสดงรายชื่อ DC">${icon('chevron')}</button>
+            <div class="lg-list" id="lgList" role="listbox" hidden></div></span></label>
         <label class="lg-fl">Username<input class="lg-inp" id="lgUser" autocomplete="username" placeholder="ชื่อผู้ใช้" value="${esc(lastUser)}"></label>
         <label class="lg-fl">Password
           <span class="lg-pass"><input class="lg-inp" id="lgPin" type="password" autocomplete="current-password" placeholder="รหัสผ่าน">
@@ -805,13 +815,40 @@ body.busy .modal-foot .btn, body.busy [data-action="ack"] { pointer-events: none
     try {
       const j = await apiPost('teams');
       ui.teams = j.teams;
-      $('#lgTeams').innerHTML = j.teams.map((t) => `<option value="${esc(t)}">`).join('');
       const t = $('#lgTeam');
       t.disabled = false;
       if (!j.teams.includes(t.value)) t.value = '';
       (t.value ? (lastUser ? $('#lgPin') : $('#lgUser')) : t).focus();
       if (!j.teams.length) $('#lgErr').textContent = 'ยังไม่มีทีมที่ตั้งรหัสผ่าน — ให้ผู้ดูแลกรอกรหัสผ่านในชีต Teams';
     } catch (e) { $('#lgErr').textContent = 'โหลดรายชื่อ DC ไม่ได้: ' + e.message; }
+  }
+  /** รายชื่อ DC แบบเลือก/ค้นหา: ถ้าค่าในช่องเป็นชื่อทีมเต็มอยู่แล้ว แสดงทั้งหมด (เปลี่ยน DC ได้เสมอ) */
+  function renderTeamList(showAll) {
+    const inp = $('#lgTeam'), list = $('#lgList');
+    if (!inp || !list) return;
+    const all = ui.teams || [];
+    const q = inp.value.trim().toLowerCase();
+    const items = showAll || all.includes(inp.value.trim()) ? all : all.filter((t) => t.toLowerCase().includes(q));
+    ui.lgIdx = Math.max(0, items.indexOf(inp.value.trim()));
+    list.innerHTML = items.length
+      ? items.map((t, i) => `<button type="button" class="lg-opt${i === ui.lgIdx ? ' on' : ''}${t === inp.value.trim() ? ' sel' : ''}" role="option" data-action="lg-pick" data-team="${esc(t)}">${esc(t)}</button>`).join('')
+      : '<div class="lg-none">ไม่พบ DC ที่ค้นหา</div>';
+    list.hidden = false;
+    inp.setAttribute('aria-expanded', 'true');
+    const on = list.querySelector('.lg-opt.on');
+    if (on) on.scrollIntoView({ block: 'nearest' });
+  }
+  function closeTeamList() {
+    const list = $('#lgList');
+    if (list) list.hidden = true;
+    const inp = $('#lgTeam');
+    if (inp) inp.setAttribute('aria-expanded', 'false');
+  }
+  function pickTeam(t) {
+    $('#lgTeam').value = t;
+    $('#lgTeam').classList.remove('invalid');
+    closeTeamList();
+    ($('#lgUser').value ? $('#lgPin') : $('#lgUser')).focus();
   }
   async function submitLogin() {
     const typed = $('#lgTeam').value.trim();
@@ -2537,7 +2574,27 @@ body.busy .modal-foot .btn, body.busy [data-action="ack"] { pointer-events: none
     window.scrollTo(0, 0);
   }
 
+  // ช่องเลือก DC ในหน้าเข้าสู่ระบบ
+  document.addEventListener('focusin', (e) => { if (e.target.id === 'lgTeam') { e.target.select(); renderTeamList(true); } });
+  document.addEventListener('input', (e) => { if (e.target.id === 'lgTeam') renderTeamList(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.target.id !== 'lgTeam') return;
+    const list = $('#lgList');
+    const opts = list ? [...list.querySelectorAll('.lg-opt')] : [];
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (list.hidden) { renderTeamList(true); return; }
+      ui.lgIdx = Math.min(opts.length - 1, Math.max(0, (ui.lgIdx || 0) + (e.key === 'ArrowDown' ? 1 : -1)));
+      opts.forEach((o, i) => o.classList.toggle('on', i === ui.lgIdx));
+      if (opts[ui.lgIdx]) opts[ui.lgIdx].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter' && list && !list.hidden && opts[ui.lgIdx || 0]) {
+      e.preventDefault();
+      pickTeam(opts[ui.lgIdx || 0].dataset.team);
+    } else if (e.key === 'Escape' || e.key === 'Tab') closeTeamList();
+  });
+
   document.addEventListener('click', async (e) => {
+    if (!e.target.closest('.lg-select')) closeTeamList();
     const el = e.target.closest('[data-action]');
     if (!el) {
       if (!e.target.closest('.bell-wrap')) $('#bellPanel').classList.remove('open');
@@ -2616,6 +2673,10 @@ body.busy .modal-foot .btn, body.busy [data-action="ack"] { pointer-events: none
         break;
       }
       case 'admin-ask': e.stopPropagation(); adminAsk(el.dataset.mode, el.dataset.plate); break;
+      case 'lg-pick': pickTeam(el.dataset.team); break;
+      case 'lg-toggle':
+        if ($('#lgList').hidden) { $('#lgTeam').focus(); renderTeamList(true); } else closeTeamList();
+        break;
       case 'toggle-pass': {
         const p = $('#lgPin');
         const show = p.type === 'password';
