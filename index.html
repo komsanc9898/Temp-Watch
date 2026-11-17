@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Temp Alert Control Tower</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=24" />
+</head>
+<body>
+  <div class="app">
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar" id="sidebar">
+      <a href="#/dashboard" class="partner-logo" aria-label="NIM Express | SEAL Cold Chain — หน้าภาพรวม">
+        <img src="assets/logo-nim-seal.png" alt="NIM Express | SEAL Cold Chain" width="462" height="94" />
+      </a>
+      <div class="brand">
+        <div class="brand-logo"><span class="ico" data-icon="thermo"></span></div>
+        <div>
+          <div class="brand-name">TEMP WATCH</div>
+          <div class="brand-sub">FLEET / COLD CHAIN</div>
+        </div>
+      </div>
+
+      <div class="nav-group">CONTROL CENTER</div>
+      <nav class="nav">
+        <a href="#/dashboard" data-route="dashboard"><span class="ico" data-icon="grid"></span>ภาพรวมแจ้งเตือน</a>
+        <a href="#/alerts" data-route="alerts"><span class="ico" data-icon="bell"></span><span id="navAlertsLbl">รายการแจ้งเตือน</span><span class="nav-badge" id="navBadge"></span></a>
+        <a href="#/inspections" data-route="inspections"><span class="ico" data-icon="clipboard"></span><span id="navInspLbl">บันทึกผลการตรวจสอบ</span></a>
+        <a href="#/vehicles" data-route="vehicles"><span class="ico" data-icon="truck"></span>สถานะรถ / อุณหภูมิสด</a>
+        <a href="#/import" data-route="import"><span class="ico" data-icon="upload"></span>นำเข้ารายงานประจำวัน</a>
+      </nav>
+      <div class="nav-group">รายงาน</div>
+      <nav class="nav">
+        <a href="#/report" data-route="report"><span class="ico" data-icon="chart"></span>สรุปผลตาม DC</a>
+      </nav>
+      <div class="nav-group">ตั้งค่า</div>
+      <nav class="nav">
+        <a href="#/settings" data-route="settings"><span class="ico" data-icon="sliders"></span>เกณฑ์อุณหภูมิ / ระบบ</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-logout" data-action="logout" id="navLogout" hidden><span class="ico" data-icon="logout"></span>ออกจากระบบ</button>
+        <div class="sidebar-foot">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="liveText">รับข้อมูลสด</span>
+        </div>
+      </div>
+    </aside>
+    <div class="scrim" data-action="close-nav"></div>
+
+    <!-- ===== Main ===== -->
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" data-action="open-nav" aria-label="เมนู"><span class="ico" data-icon="menu"></span></button>
+        <div class="title-block">
+          <h1 id="pageTitle">ภาพรวมแจ้งเตือนอุณหภูมิ</h1>
+          <div class="subtitle" id="pageSub">TEMPERATURE CONTROL / DC ALERT</div>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" data-action="toggle-filters" id="filterBtn" title="ค้นหา / ตัวกรอง" aria-label="ค้นหา / ตัวกรอง" aria-expanded="false"><span class="ico" data-icon="search"></span><span class="filter-dot" id="filterDot" hidden></span></button>
+          <label class="select-pill">
+            <span class="ico" data-icon="calendar"></span>
+            <select id="periodSel" aria-label="ช่วงเวลา">
+              <option value="today">วันนี้</option>
+              <option value="7d" selected>7 วันล่าสุด</option>
+              <option value="30d">30 วันล่าสุด</option>
+              <option value="all">ทั้งหมด</option>
+            </select>
+          </label>
+          <button class="icon-btn" data-action="toggle-theme" aria-label="สลับธีม"><span class="ico" data-icon="moon" id="themeIco"></span></button>
+          <div class="bell-wrap">
+            <button class="icon-btn" data-action="toggle-bell" aria-label="การแจ้งเตือน"><span class="ico" data-icon="bell"></span><span class="badge" id="bellBadge"></span></button>
+            <div class="bell-panel" id="bellPanel"></div>
+          </div>
+          <label class="user-chip">
+            <span id="userName">admin</span>
+            <select id="roleSel" aria-label="สิทธิ์การมองเห็น"></select>
+          </label>          <button class="btn btn-ghost" data-action="manual-alert"><span class="ico" data-icon="plus"></span><span class="hide-md">แจ้งเตือนด้วยตนเอง</span></button>
+          <button class="btn btn-primary" data-action="export"><span class="ico" data-icon="download"></span><span class="hide-sm">Export</span></button>
+        </div>
+      </header>
+
+      <section class="filters" id="filters">
+        <label class="field search">
+          <span class="ico" data-icon="search"></span>
+          <input id="fQ" placeholder="ค้นหาทะเบียนรถ / DC / รหัสแจ้งเตือน / คนขับ..." />
+        </label>
+        <select class="field" id="fDc"></select>
+        <select class="field" id="fType">
+          <option value="">ทุกประเภทรถ</option>
+          <option value="Frozen">แช่แข็ง (Frozen)</option>
+          <option value="Chilled">แช่เย็น (Chilled)</option>
+          <option value="Cool">ควบคุมอุณหภูมิ (Cool)</option>
+        </select>
+        <select class="field" id="fStatus">
+          <option value="">ทุกสถานะ</option>
+          <option value="new">รอรับทราบ</option>
+          <option value="ack">กำลังตรวจสอบ</option>
+          <option value="resolved">ปิดงานแล้ว</option>
+        </select>
+        <button class="btn btn-sm btn-outline" data-action="clear-filters">ล้างตัวกรอง</button>
+      </section>
+
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" id="modalCard"></div>
+  </div>
+  <div class="toasts" id="toasts"></div>
+
+  <script src="app.js?v=25"></script>
+</body>
+</html>
